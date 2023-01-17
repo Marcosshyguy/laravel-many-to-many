@@ -35,8 +35,9 @@ class ProjectController extends Controller
     public function create()
     {
         $typeOfproject = Type::all();
-        $typeOfTechnolgies = Technology::all();
-        return view('admin.projects.create', compact('typeOfproject', 'typeOfTechnolgies'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.create', compact('typeOfproject', 'technologies'));
     }
 
     /**
@@ -55,7 +56,12 @@ class ProjectController extends Controller
             $addProject['new_image'] = Storage::put('images', $request->new_image);
         };
         $addProject['user_id'] = Auth::id();
+
         $project = Project::create($addProject);
+
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($request->technologies);
+        }
         return redirect()->route('admin.projects.index')->with('projectAddedSuccessfully', 'Progetto aggiunto con successo');
     }
 
@@ -79,8 +85,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $typeOfproject = Type::all();
-        $typeOfTechnolgies = Technology::all();
-        return view('admin.projects.edit', compact('project', 'typeOfproject', 'typeOfTechnolgies'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.edit', compact('project', 'typeOfproject', 'technologies'));
     }
 
     /**
@@ -103,6 +110,14 @@ class ProjectController extends Controller
 
         $project->update($projectToChange);
 
+        if ($request->has('technologies')) {
+
+            $project->technologies()->sync($request->technologies);
+        } else {
+            // $project->technologies()->sync([]);
+            $project->technologies()->detach();
+        }
+
         return redirect()->route('admin.projects.index')->with('projectUpdatedSuccessfully', "$project->title è stato aggiornato con successo");
     }
 
@@ -117,6 +132,7 @@ class ProjectController extends Controller
         if ($project->new_image) {
             Storage::delete($project->new_image);
         }
+        $project->technologies()->detach();
         $project->delete();
         return redirect()->route('admin.projects.index')->with('projectDeleted', "$project->title è stato cancellato");
     }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['technology_id', 'user_id', 'type_id', 'title', 'description', 'languages_used', 'production_date', 'slug', 'new_image'];
+    protected $fillable = ['technology_id', 'user_id', 'type_id', 'title', 'description', 'production_date', 'slug', 'new_image'];
 
     public function type()
     {
@@ -20,7 +20,7 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tecnologys()
+    public function technologies()
     {
         return $this->belongsToMany(Technology::class);
     }

@@ -33,7 +33,7 @@ class StoreProjectRequest extends FormRequest
             'production_date' => 'nullable',
             'languages_used' => 'required',
             'new_image' => 'nullable|image|max:50000',
-
+            'technologies' => 'exists:technologies,id'
         ];
     }
 

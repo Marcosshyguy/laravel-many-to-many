@@ -62,6 +62,28 @@
                 </div>
             </div>
 
+            <div class="mb-2">
+                <p>Tipo di linguaggi e tecnologie usate</p>
+
+                @foreach ($technologies as $technology)
+                    <div class="form-check">
+                        <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox"
+                            value="{{ $technology->id }}" id="technology-{{ $technology->id }}" name="technologies[]">
+                        <label class="form-check-label" for="technology-{{ $technology->id }}">
+                            {{ $technology->technology_name }}
+                        </label>
+                    </div>
+                @endforeach
+
+
+
+                @error('technologies')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <div>
                 <label for="new_image">Immagine</label>
                 <input type="file" class="form-control @error('new_image') is-invalid @enderror" id='new_image'
@@ -80,16 +102,7 @@
 
 
 
-            <div class="mb-2">
-                <label for="languages_used">Linguaggi utilizzati</label>
-                <input type="text" class="form-control @error('languages_used') is-invalid @enderror" id="languages_used"
-                    name="languages_used" value="{{ old('languages_used') }}">
-                @error('languages_used')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
+
 
 
             <div class="mb-2">
