@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +35,8 @@ class ProjectController extends Controller
     public function create()
     {
         $typeOfproject = Type::all();
-        return view('admin.projects.create', compact('typeOfproject'));
+        $typeOfTechnolgies = Technology::all();
+        return view('admin.projects.create', compact('typeOfproject', 'typeOfTechnolgies'));
     }
 
     /**
@@ -77,7 +79,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $typeOfproject = Type::all();
-        return view('admin.projects.edit', compact('project', 'typeOfproject'));
+        $typeOfTechnolgies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'typeOfproject', 'typeOfTechnolgies'));
     }
 
     /**
