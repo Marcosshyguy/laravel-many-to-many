@@ -17,13 +17,13 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create('it_IT');
-        $project = new Project();
-        $project->title = $faker->firstName();
-        $project->description = $faker->paragraph();
-        $project->production_date = $faker->date();
-        $project->languages_used = $faker->firstName();
-        $project->slug = Str::slug($project->title, '-');
-        $project->save();
+        // $faker = Faker::create('it_IT');
+        // $project = new Project();
+        // $project->title = $faker->firstName();
+        // $project->description = $faker->paragraph();
+        // $project->production_date = $faker->date();
+        // $project->languages_used = $faker->firstName();
+        // $project->slug = Str::slug($project->title, '-');
+        // $project->save();
     }
 }
