@@ -29,7 +29,7 @@ class UpdateProjectRequest extends FormRequest
             'title' => 'required|min:5',
             'description' => 'bail|required|min:5|max:300',
             'production_date' => 'nullable',
-            'languages_used' => 'required',
+
             'new_image' => 'nullable|image|max:50000',
             'technologies' => 'exists:technologies,id'
         ];
@@ -43,7 +43,7 @@ class UpdateProjectRequest extends FormRequest
             'description.required' => 'Manca descrizione',
             'description.min' => 'Descrizione troppo corta',
             'description.max' => 'Descrizione troppo lunga',
-            'languages_used' => 'Linguaggi da inserire',
+
             'new_image.image' => "Il file inserito non è supportato",
             'new_image.max' => 'Il file è troppo grande'
         ];

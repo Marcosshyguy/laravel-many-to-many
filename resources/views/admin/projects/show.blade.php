@@ -19,9 +19,17 @@
         @if ($project->user?->name)
             <p>Creato da: {{ $project->user->name }}</p>
         @endif
-        {{-- @if ($project->technologies?->technologies)
-            <p>{{ $project->technologies->technologies }}</p>
-        @endif --}}
+        <p>
+            Tecnologie utilizze:
+        </p>
+        <ul>
+            @forelse ($project->technologies as $technology)
+                <li>{{ $technology->technology_name }}</li>
+            @empty
+                <p>Nessuna tecnologia inserita</p>
+            @endforelse
+
+        </ul>
 
         <p>Immagine:</p>
         <div>

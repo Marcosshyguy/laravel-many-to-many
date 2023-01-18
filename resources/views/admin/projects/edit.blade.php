@@ -52,21 +52,22 @@
                 @foreach ($technologies as $technology)
                     <div class="form-check">
                         <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox"
-                            value="{{ $technology->id }}" id="technology-{{ $technology->id }}" name="technologies[]">
+                            value="{{ $technology->id }}" id="technology-{{ $technology->id }}" name="technologies[]"
+                            @checked($errors->any() ? in_array($technology->id, old('technologies', [])) : $project->technologies->contains($technology))>
                         <label class="form-check-label" for="technology-{{ $technology->id }}">
                             {{ $technology->technology_name }}
                         </label>
                     </div>
                 @endforeach
-
-
-
                 @error('technologies')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+
+
+
 
             <div class="mb-2">
                 <label for="type">Tipo di progetto</label>

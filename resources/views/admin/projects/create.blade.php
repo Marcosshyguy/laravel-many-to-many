@@ -64,19 +64,16 @@
 
             <div class="mb-2">
                 <p>Tipo di linguaggi e tecnologie usate</p>
-
                 @foreach ($technologies as $technology)
                     <div class="form-check">
                         <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox"
-                            value="{{ $technology->id }}" id="technology-{{ $technology->id }}" name="technologies[]">
+                            value="{{ $technology->id }}" id="technology-{{ $technology->id }}" name="technologies[]"
+                            @checked(in_array($technology->id, old('technologies', [])))>
                         <label class="form-check-label" for="technology-{{ $technology->id }}">
                             {{ $technology->technology_name }}
                         </label>
                     </div>
                 @endforeach
-
-
-
                 @error('technologies')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -99,11 +96,6 @@
                     <img src="" alt="" id="preview-image">
                 </div>
             </div>
-
-
-
-
-
 
             <div class="mb-2">
                 <label for="production_date">Data di produzione</label>
